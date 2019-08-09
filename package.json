@@ -1,7 +1,7 @@
 {
   "name": "skybet.jsx",
-  "version": "0.1.0",
   "description": "An example of my React knowledge",
+  "version": "0.1.0",
   "private": true,
   "author": {
     "name": "Birkan Ismail",
@@ -36,6 +36,10 @@
     "hooks",
     "state"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isbirkan/skybet.jsx.git"
+  },
   "browserslist": {
     "production": [
       ">0.2%",

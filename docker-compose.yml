@@ -1,6 +1,21 @@
 version: "3"
+
 services:
   api:
+    container_name: api.skybet.jsx
     image: sbgtechtest/api:2.0.0
     ports:
       - "8888-8890:8888-8890"
+
+  website:
+    container_name: web.skybet.jsx
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/app"
+      - "/app/node_modules"
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
