@@ -1,0 +1,54 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": ["import", "jsx-a11y", "prettier", "react"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalDecorators": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "import/default": 0,
+    "import/no-extraneous-dependencies": 1,
+    "import/prefer-default-export": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-for": 0,
+    "linebreak-style": 0,
+    "no-console": 0,
+    "no-nested-ternary": 1,
+    "no-param-reassign": 1,
+    "no-shadow": 1,
+    "no-unused-vars": 1,
+    "prefer-destructuring": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "jsxBracketSameLine": true,
+        "printWidth": 120,
+        "singleQuote": true,
+        "tabWidth": 2
+      }
+    ],
+    "react/destructuring-assignment": 0,
+    "react/display-name": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-access-state-in-setstate": 0,
+    "react/prop-types": [1, { "skipUndeclared": true }]
+  }
+}
