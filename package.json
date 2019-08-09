@@ -9,6 +9,8 @@
     "url": "https://github.com/isbirkan"
   },
   "scripts": {
+    "docker:start": "docker-compose up -d --build",
+    "docker:stop": "docker-compose stop",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
