@@ -27,7 +27,8 @@ This will setup the environment for you. Please sit back and sip on your beer. O
 * Finished your tea? Let's see the awesome website in action:   
 `npm run docker:start` or `docker-compose up`
 * BOOM! It now runs on your [local machine](http://localhost:3000)! *But how? You said it's inside docker!* 
-<p align="left" style="padding-left: 40px;">
+<p align="left">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img width="220" height="144" src="https://tenor.com/view/magic-confetti-awesome-gif-11884906.gif">
 </p>  
 
