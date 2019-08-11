@@ -30,7 +30,14 @@ This will setup the environment for you. Please sit back and sip on your beer. O
 <p align="left">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img width="220" height="144" src="https://tenor.com/view/magic-confetti-awesome-gif-11884906.gif">
-</p>  
+</p>
+
+#### What I used in development:
+
+* My brain - well, at least a part of it
+* React - obviously
+* React Router
+* Reactstrap - bootstrap in React
 
 ### Since you're such a nice listener, I threw in a bonus section
 <p align="left">
