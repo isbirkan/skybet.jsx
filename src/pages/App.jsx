@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { Container, Row } from 'reactstrap';
+import { Container } from 'reactstrap';
 import * as ROUTES from '../constants/routes';
 
 import Navbar from '../components/Navbar';

@@ -8,7 +8,7 @@ export default function NotFound() {
       <div className="inline-block ">
         <h1 className="lead">The page you requested was not found.</h1>
         <h1 className="lead">
-          Go back to <Link to="/">home</Link>
+          Have a safe trip to the <Link to="/">home</Link> page
         </h1>
       </div>
     </div>

@@ -3,10 +3,12 @@ import { render } from 'react-dom';
 import App from './pages/App';
 import * as serviceWorker from './serviceWorker';
 
+/* eslint-disable */
 if (process.env.NODE_ENV === `production`) {
   console.log = function() {};
   console.info = function() {};
 }
+/* eslint-enable */
 
 process.on('unhandledRejection', reason => {
   console.warn(`Reason: ${reason}`);
