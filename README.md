@@ -49,8 +49,8 @@ This will setup the environment for you. Please sit back and sip on your beer. O
 * FiraCode with font ligatures support. This will really make your code look neat!   
 You can download it from its official GitHub repo or install it through Ubuntu's package manager.   
 Then, all you need to do is change the Visual Studio Code settings, in order to support it:   
-`"editor.fontFamily": "'Fira Code', 'monospace', monospace",   
-"editor.fontLigatures": true,`
+`"editor.fontFamily": "'Fira Code', 'monospace', monospace"`   
+`"editor.fontLigatures": true`
 
 #### Awesome extensions I use (alphabetically listed, because OCD):
 
