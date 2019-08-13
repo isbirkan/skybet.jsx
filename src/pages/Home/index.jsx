@@ -1,12 +1,17 @@
 import React from 'react';
 import { Container, Row } from 'reactstrap';
-
-const w = new Websocket('ws://localhost:8889');
+import { useApiSubscriber } from '../../hooks/socketHook';
 
 export default function Home() {
-  return (
-    <Container>
-      <Row>Hello</Row>
-    </Container>
-  );
+  const { messages } = useApiSubscriber();
+  console.log(messages);
+
+  const content =
+    messages.error != null ? (
+      <Row>{messages.error}</Row>
+    ) : (
+      messages.liveEvents.map(message => <Row>{JSON.stringify(message)}</Row>)
+    );
+
+  return <Container>{content}</Container>;
 }

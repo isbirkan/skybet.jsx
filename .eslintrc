@@ -23,6 +23,7 @@
     "node": true
   },
   "rules": {
+    "func-names": 0,
     "import/default": 0,
     "import/no-extraneous-dependencies": 1,
     "import/prefer-default-export": 0,

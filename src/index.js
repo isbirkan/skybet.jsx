@@ -4,7 +4,7 @@ import App from './pages/App';
 import * as serviceWorker from './serviceWorker';
 
 /* eslint-disable */
-if (process.env.NODE_ENV === `production`) {
+if (process.env.NODE_ENV === 'production') {
   console.log = function() {};
   console.info = function() {};
 }
