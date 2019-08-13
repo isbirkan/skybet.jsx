@@ -1,17 +1,18 @@
 import React from 'react';
 import { Container, Row } from 'reactstrap';
-import { useApiSubscriber } from '../../hooks/socketHook';
+import { useSocket } from '../../hooks/useSocket';
+import { service } from '../../services/socket';
 
 export default function Home() {
-  const { messages } = useApiSubscriber();
+  const { messages, socket } = useSocket();
+  const { getLiveEvents } = service(socket);
+
   console.log(messages);
+  getLiveEvents();
 
-  const content =
-    messages.error != null ? (
-      <Row>{messages.error}</Row>
-    ) : (
-      messages.liveEvents.map(message => <Row>{JSON.stringify(message)}</Row>)
-    );
-
-  return <Container>{content}</Container>;
+  return (
+    <Container>
+      <Row>Hello</Row>
+    </Container>
+  );
 }
