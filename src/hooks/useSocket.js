@@ -1,46 +1,42 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { initialiseSocket, closeWebSocket } from '../instances/socket';
 import * as responseType from '../constants/responseTypes';
 
+const socket = initialiseSocket();
+
 export function useSocket() {
-  const [socket, setSocket] = useState();
-  const [messages, setMessages] = useState({
+  const [state, setState] = useState({
     events: [],
     markets: [],
     outcomes: [],
     liveEvents: [],
+    loading: true,
     error: null
   });
 
-  function getMessage(message) {
-    const data = JSON.parse(message.data);
-
-    switch (data.type) {
-      case responseType.INIT:
-        break;
-      case responseType.LIVE_EVENTS:
-        setMessages({ liveEvents: data.data });
-        break;
-      default:
-        setMessages({ error: data });
-    }
-  }
-
   useEffect(() => {
-    if (socket === undefined) {
-      const ws = new WebSocket('ws://localhost:8889');
+    socket.onmessage = response => {
+      const data = JSON.parse(response.data);
 
-      ws.onopen = () => {
-        console.log('socket connected');
-        setSocket(ws);
-      };
+      switch (data.type) {
+        case responseType.INIT:
+          break;
+        case responseType.LIVE_EVENTS:
+          setState({ liveEvents: data.data });
+          break;
+        default:
+          setState({ error: data });
+      }
+    };
 
-      ws.onerror = error => {
-        console.log(`socket error: ${error}`);
-      };
-
-      ws.onmessage = getMessage;
-    }
+    return () => {
+      closeWebSocket();
+    };
   });
 
-  return { messages, socket };
+  const getLiveEvents = primaryMarkets => {
+    socket.send(JSON.stringify({ type: 'getLiveEvents', primaryMarkets }));
+  };
+
+  return { state, getLiveEvents };
 }

@@ -1,18 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row } from 'reactstrap';
 import { useSocket } from '../../hooks/useSocket';
-import { service } from '../../services/socket';
+import { getWebSocket, closeWebSocket } from '../../instances/socket';
+
+import Loader from '../../components/Loader/FullLoader';
 
 export default function Home() {
-  const { messages, socket } = useSocket();
-  const { getLiveEvents } = service(socket);
+  const { state, getLiveEvents } = useSocket();
+  const socket = getWebSocket();
 
-  console.log(messages);
-  getLiveEvents();
+  useEffect(() => {
+    if (socket !== undefined) {
+      getLiveEvents();
+    }
+  });
 
   return (
     <Container>
-      <Row>Hello</Row>
+      <Row>{JSON.stringify(state.liveEvents)}</Row>
     </Container>
   );
 }
