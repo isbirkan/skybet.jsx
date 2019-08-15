@@ -1,42 +1,55 @@
-import { useState, useEffect } from 'react';
-import { initialiseSocket, closeWebSocket } from '../instances/socket';
-import * as responseType from '../constants/responseTypes';
-
-const socket = initialiseSocket();
+import { useCallback, useContext, useEffect, useRef } from 'react';
+import { DispatchContext } from '../reducers/socket';
+import * as requestType from '../constants/requestTypes';
+import * as actions from '../constants/actions';
 
 export function useSocket() {
-  const [state, setState] = useState({
-    events: [],
-    markets: [],
-    outcomes: [],
-    liveEvents: [],
-    loading: true,
-    error: null
-  });
+  const dispatch = useContext(DispatchContext);
+  const socketRef = useRef();
+
+  const sendMessage = useCallback(
+    message => {
+      socketRef.current.send(JSON.stringify(message));
+    },
+    [socketRef]
+  );
 
   useEffect(() => {
-    socket.onmessage = response => {
-      const data = JSON.parse(response.data);
+    function handleOpen() {
+      console.log('socket connected');
+    }
 
-      switch (data.type) {
-        case responseType.INIT:
-          break;
-        case responseType.LIVE_EVENTS:
-          setState({ liveEvents: data.data });
-          break;
-        default:
-          setState({ error: data });
-      }
+    function handleClose() {
+      console.log('socket disconnected');
+    }
+
+    function handleError(error) {
+      dispatch([actions.FAILURE, error]);
+      console.log('socket error');
+    }
+
+    const handleReceiveMessage = ({ data }) => {
+      const response = JSON.parse(data);
+      dispatch([response.type, response.data]);
     };
+
+    const socket = new WebSocket('ws://localhost:8889');
+    socket.onopen = handleOpen;
+    socket.onclose = handleClose;
+    socket.onerror = handleError;
+    socket.onmessage = handleReceiveMessage;
+    socketRef.current = socket;
 
     return () => {
-      closeWebSocket();
+      try {
+        socket.send(JSON.stringify({ type: requestType.UNSUBSCRIBE }));
+        socket.close();
+      } catch (error) {
+        dispatch([actions.FAILURE, error]);
+        console.log('socket disconnect error');
+      }
     };
-  });
+  }, []);
 
-  const getLiveEvents = primaryMarkets => {
-    socket.send(JSON.stringify({ type: 'getLiveEvents', primaryMarkets }));
-  };
-
-  return { state, getLiveEvents };
+  return { sendMessage };
 }
