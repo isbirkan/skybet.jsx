@@ -1,9 +1,9 @@
 .loading-full {
-  z-index: 999;
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
   position: fixed;
   width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 999;
 }

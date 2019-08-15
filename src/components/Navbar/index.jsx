@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { DispatchContext, StoreContext } from '../../reducers/socket';
 import * as actions from '../../constants/actions';
 import * as ROUTES from '../../constants/routes';
-import * as RESOURCES from '../../constants/navbar';
+import * as RESOURCES from '../../constants/resources/navbar';
 
 import './Navbar.css';
 

@@ -1,0 +1,9 @@
+export const AWAY = 'Away';
+export const CLASS_NAME = 'Class';
+export const HOME = 'Home';
+export const NAME = 'Name';
+export const SCORES = 'Scores';
+export const SORT = 'Sort';
+export const STATUS = 'Status';
+export const START_TIME = 'Start time';
+export const TYPE_NAME = 'Type';

@@ -36,6 +36,7 @@ This will setup the environment for you. Please sit back and sip on your beer. O
 
 * My brain - well, at least a part of it
 * React - obviously
+* WebSockets
 * React Router
 * Reactstrap - bootstrap in React
 
