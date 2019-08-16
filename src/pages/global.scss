@@ -19,8 +19,8 @@ body {
 
 a {
   color: #233366;
-}
 
-a:hover {
-  color: #a42327;
+  &:hover {
+    color: #a42327;
+  }
 }

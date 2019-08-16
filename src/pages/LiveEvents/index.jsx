@@ -1,17 +1,17 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSocket } from '../../hooks/useSocket';
+import { SocketContext } from '../../hooks/useSocket';
 import { StoreContext } from '../../reducers/socket';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/liveEvents';
 
 import Loader from '../../components/Loader/FullLoader';
+import Error from '../Error';
 
 import './LiveEvents.scss';
 
 export default function LiveEvents(props) {
   const store = useContext(StoreContext);
-  const { sendMessage } = useSocket();
+  const sendMessage = useContext(SocketContext);
 
   useEffect(() => {
     if (!store.loading && store.liveEvents.length === 0) {
@@ -19,7 +19,7 @@ export default function LiveEvents(props) {
     }
   }, [store.liveEvents, store.loading, sendMessage]);
 
-  function goToMarkets(marketId) {
+  function goToMarket(marketId) {
     props.history.push(`/market/${marketId}`);
   }
 
@@ -48,6 +48,9 @@ export default function LiveEvents(props) {
   }
 
   let content = <Loader />;
+  if (store.error) {
+    content = <Error message={store.error.message} />;
+  }
   if (!store.loading && store.liveEvents) {
     content = (
       <table className="table table-responsive-sm">
@@ -63,7 +66,7 @@ export default function LiveEvents(props) {
         </thead>
         <tbody>
           {store.liveEvents.map(item => (
-            <tr key={`row_${item.eventId}`} onClick={() => goToMarkets(item.markets[0])}>
+            <tr key={`row_${item.eventId}`} onClick={() => goToMarket(item.markets[0])}>
               <td>{item.name}</td>
               <td>{item.typeName}</td>
               <td>{item.className}</td>
@@ -81,7 +84,10 @@ export default function LiveEvents(props) {
     <div className="container">
       <div className="row">
         <div className="col-md-10 offset-md-1 col-sm-10 offset-sm-1">
-          <div className="card bg-light mb-3 mt-3">{content} </div>
+          <div className="card bg-light mb-3 mt-3">
+            <h5 className="text-center">{resources.HEADER_TEXT}</h5>
+            {content}
+          </div>
         </div>
       </div>
     </div>

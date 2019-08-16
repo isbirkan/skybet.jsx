@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Container, Nav, NavItem } from 'reactstrap';
+import { Button, Container, Nav, NavItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { DispatchContext, StoreContext } from '../../reducers/socket';
 import * as actions from '../../constants/actions';
@@ -14,6 +14,10 @@ export default function Navbar() {
 
   function toggleFormat() {
     dispatch([actions.TRIGGER_FORMAT, store.format === 'fractional' ? 'decimal' : 'fractional']);
+  }
+
+  function displayStoreObject() {
+    console.log(store);
   }
 
   useEffect(() => {}, [store.format]);
@@ -36,6 +40,9 @@ export default function Navbar() {
               {RESOURCES.DECIMAL}
             </label>
           </div>
+          <Button color="primary" size="sm" hidden onClick={() => displayStoreObject()}>
+            Store
+          </Button>
         </div>
       </Container>
     </Nav>

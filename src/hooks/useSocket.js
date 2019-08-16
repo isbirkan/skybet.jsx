@@ -1,10 +1,8 @@
-import { useCallback, useContext, useEffect, useRef } from 'react';
-import { DispatchContext } from '../reducers/socket';
+import React, { useCallback, useEffect, useRef } from 'react';
 import * as requestType from '../constants/requestTypes';
 import * as actions from '../constants/actions';
 
-export function useSocket() {
-  const dispatch = useContext(DispatchContext);
+export function useSocket(dispatch) {
   const socketRef = useRef();
 
   const sendMessage = useCallback(
@@ -48,7 +46,6 @@ export function useSocket() {
         socket.close();
       } catch (error) {
         dispatch([actions.FAILURE, error]);
-        console.log(error);
         console.log('socket disconnect error');
       }
     };
@@ -56,3 +53,5 @@ export function useSocket() {
 
   return { sendMessage };
 }
+
+export const SocketContext = React.createContext();

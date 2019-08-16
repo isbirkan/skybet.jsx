@@ -39,6 +39,7 @@ export function socketReducer(state, [type, payload]) {
         loading: true,
         error: null
       };
+    case actions.ERROR:
     case actions.FAILURE:
       return {
         ...state,

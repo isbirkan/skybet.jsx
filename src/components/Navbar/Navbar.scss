@@ -9,13 +9,11 @@
     border-color: #a42327;
     cursor: pointer;
 
-
+    &.active {
+      background-color: #a42327;
+    }
   }
   
-  .btn.active {
-    background-color: #a42327;
-  }
-
   a,
   a:active,
   a:hover {

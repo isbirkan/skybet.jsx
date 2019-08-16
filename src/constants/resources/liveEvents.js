@@ -7,3 +7,4 @@ export const SORT = 'Sort';
 export const STATUS = 'Status';
 export const START_TIME = 'Start time';
 export const TYPE_NAME = 'Type';
+export const HEADER_TEXT = 'Please select an entry to view the primary market';
