@@ -1,0 +1,25 @@
+.navbar {
+  background-color: #233366;
+  color: #ffffff;
+  font-weight: 700;
+
+  .btn {
+    color: #ffffff;
+    background-color: #c54845;
+    border-color: #a42327;
+    cursor: pointer;
+
+
+  }
+  
+  .btn.active {
+    background-color: #a42327;
+  }
+
+  a,
+  a:active,
+  a:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+}

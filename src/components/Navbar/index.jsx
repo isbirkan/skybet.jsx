@@ -6,7 +6,7 @@ import * as actions from '../../constants/actions';
 import * as ROUTES from '../../constants/routes';
 import * as RESOURCES from '../../constants/resources/navbar';
 
-import './Navbar.css';
+import './Navbar.scss';
 
 export default function Navbar() {
   const store = useContext(StoreContext);
@@ -19,7 +19,7 @@ export default function Navbar() {
   useEffect(() => {}, [store.format]);
 
   return (
-    <Nav className="navbar navbar-dark bg-secondary">
+    <Nav className="navbar">
       <Container>
         <NavItem>
           <Link to={ROUTES.LANDING}>{RESOURCES.LIVE_EVENTS}</Link>
@@ -27,11 +27,11 @@ export default function Navbar() {
         <div className="float-right">
           {RESOURCES.ODDS_FORMAT}
           <div className="btn-group btn-group-toggle ml-2" data-toggle="buttons">
-            <label className={`btn btn-info btn-sm ${store.format === 'fractional' ? 'active' : ''}`}>
+            <label className={`btn btn-sm ${store.format === 'fractional' ? 'active' : ''}`}>
               <input type="radio" autoComplete="off" onClick={() => toggleFormat()} />
               {RESOURCES.FRACTIONAL}
             </label>
-            <label className={`btn btn-info btn-sm ${store.format === 'decimal' ? 'active' : ''}`}>
+            <label className={`btn btn-sm ${store.format === 'decimal' ? 'active' : ''}`}>
               <input type="radio" autoComplete="off" onClick={() => toggleFormat()} />
               {RESOURCES.DECIMAL}
             </label>

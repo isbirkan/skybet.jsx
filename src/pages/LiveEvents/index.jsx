@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSocket } from '../../hooks/useSocket';
 import { StoreContext } from '../../reducers/socket';
 import * as requestType from '../../constants/requestTypes';
@@ -6,17 +7,21 @@ import * as resources from '../../constants/resources/liveEvents';
 
 import Loader from '../../components/Loader/FullLoader';
 
-import './LiveEvents.css';
+import './LiveEvents.scss';
 
-export default function LiveEvents() {
+export default function LiveEvents(props) {
   const store = useContext(StoreContext);
   const { sendMessage } = useSocket();
 
   useEffect(() => {
-    if (!store.loading) {
+    if (!store.loading && store.liveEvents.length === 0) {
       sendMessage({ type: requestType.LIVE_EVENTS, primaryMarkets: true });
     }
-  }, [store.loading]);
+  }, [store.liveEvents, store.loading, sendMessage]);
+
+  function goToMarkets(marketId) {
+    props.history.push(`/market/${marketId}`);
+  }
 
   function buildStatus(statusObject) {
     let status = '';
@@ -39,13 +44,13 @@ export default function LiveEvents() {
   }
 
   function buildScores(scoresObject) {
-    return `Home: ${scoresObject.home}, away: ${scoresObject.away}`;
+    return `${scoresObject.home} - ${scoresObject.away}`;
   }
 
   let content = <Loader />;
   if (!store.loading && store.liveEvents) {
     content = (
-      <table className="table table-striped table-bordered table-hover table-responsive-sm">
+      <table className="table table-responsive-sm">
         <thead>
           <tr>
             <th>{resources.NAME}</th>
@@ -53,12 +58,12 @@ export default function LiveEvents() {
             <th>{resources.CLASS_NAME}</th>
             <th>{resources.STATUS}</th>
             <th>{resources.START_TIME}</th>
-            <th>{resources.SCORES}</th>
+            <th>{resources.SCORE}</th>
           </tr>
         </thead>
         <tbody>
           {store.liveEvents.map(item => (
-            <tr key={`row_${item.eventId}`}>
+            <tr key={`row_${item.eventId}`} onClick={() => goToMarkets(item.markets[0])}>
               <td>{item.name}</td>
               <td>{item.typeName}</td>
               <td>{item.className}</td>

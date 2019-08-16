@@ -15,6 +15,8 @@ export function useSocket() {
   );
 
   useEffect(() => {
+    dispatch([actions.LOADING]);
+
     function handleOpen() {
       console.log('socket connected');
     }
@@ -46,10 +48,11 @@ export function useSocket() {
         socket.close();
       } catch (error) {
         dispatch([actions.FAILURE, error]);
+        console.log(error);
         console.log('socket disconnect error');
       }
     };
-  }, []);
+  }, [dispatch]);
 
   return { sendMessage };
 }

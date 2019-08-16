@@ -1,0 +1,17 @@
+.table {
+  background-color: #233366;
+  border-color: #000000;
+  color: #FFFFFF;
+  margin-bottom: 0;
+  
+
+  tr {
+    cursor: pointer;
+  }
+
+  tbody tr:hover {
+    background-color: #294376;
+    color: #FFFFFF;
+  }
+}
+
