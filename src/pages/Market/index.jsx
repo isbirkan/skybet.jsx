@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/useSocket';
 import { StoreContext } from '../../reducers/socket';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/markets';
 
+import Outcome from '../../components/Outcome';
 import Loader from '../../components/Loader/SmallLoader';
 import Error from '../Error';
 
@@ -46,26 +47,32 @@ export default function Market(props) {
   }
   if (!store.loading && market) {
     content = (
-      <table className="table table-responsive-sm market">
-        <tbody>
-          <tr>
-            <th>{resources.NAME}</th>
-            <td>{market.name}</td>
-          </tr>
-          <tr>
-            <th>{resources.TYPE_NAME}</th>
-            <td>{market.type}</td>
-          </tr>
-          <tr>
-            <th>{resources.STATUS}</th>
-            <td>{buildStatus(market.status)}</td>
-          </tr>
-          <tr>
-            <th>{resources.PRICE_LIMIT}</th>
-            <td>{market.liabilities.livePriceLimit}</td>
-          </tr>
-        </tbody>
-      </table>
+      <Fragment>
+        <table className="table table-responsive-sm market">
+          <tbody>
+            <tr>
+              <th>{resources.NAME}</th>
+              <td>{market.name}</td>
+            </tr>
+            <tr>
+              <th>{resources.TYPE_NAME}</th>
+              <td>{market.type}</td>
+            </tr>
+            <tr>
+              <th>{resources.STATUS}</th>
+              <td>{buildStatus(market.status)}</td>
+            </tr>
+            <tr>
+              <th>{resources.PRICE_LIMIT}</th>
+              <td>{market.liabilities.livePriceLimit}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h5>{resources.OUTCOMES}</h5>
+        {market.outcomes.map(item => (
+          <Outcome key={item} id={item} />
+        ))}
+      </Fragment>
     );
   }
 

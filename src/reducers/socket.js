@@ -33,6 +33,13 @@ export function socketReducer(state, [type, payload]) {
         loading: false,
         error: null
       };
+    case actions.OUTCOME:
+      return {
+        ...state,
+        outcomes: [...state.outcomes.filter(o => o.outcomeId !== payload.outcomeId), payload],
+        loading: false,
+        error: null
+      };
     case actions.TRIGGER_FORMAT:
       return {
         ...state,
