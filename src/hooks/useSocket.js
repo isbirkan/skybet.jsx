@@ -30,6 +30,7 @@ export function useSocket(dispatch) {
 
     const handleReceiveMessage = ({ data }) => {
       const response = JSON.parse(data);
+      console.log(response);
       dispatch([response.type, response.data]);
     };
 

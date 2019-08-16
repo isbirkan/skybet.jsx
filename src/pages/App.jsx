@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar';
 import LiveEvents from './LiveEvents';
 import Market from './Market';
 import NotFound from './404';
+import Loader from '../components/Loader/FullLoader';
 
 import './global.scss';
 
@@ -17,6 +18,18 @@ export default function App() {
   const { sendMessage } = useSocket(dispatch);
   console.log(store);
 
+  let content = <Loader />;
+  if (!store.loading) {
+    content = (
+      <Switch>
+        <Redirect exact from={ROUTES.LANDING} to={ROUTES.LIVE_EVENTS} />
+        <Route path={ROUTES.LIVE_EVENTS} component={LiveEvents} />
+        <Route path={ROUTES.MARKET} component={Market} />
+        <Route component={NotFound} />
+      </Switch>
+    );
+  }
+
   return (
     <Router>
       <DispatchContext.Provider value={dispatch}>
@@ -24,12 +37,7 @@ export default function App() {
           <SocketContext.Provider value={sendMessage}>
             <Navbar />
             <Container fluid className="app-container">
-              <Switch>
-                <Redirect exact from={ROUTES.LANDING} to={ROUTES.LIVE_EVENTS} />
-                <Route path={ROUTES.LIVE_EVENTS} component={LiveEvents} />
-                <Route path={ROUTES.MARKET} component={Market} />
-                <Route component={NotFound} />
-              </Switch>
+              {content}
             </Container>
           </SocketContext.Provider>
         </StoreContext.Provider>

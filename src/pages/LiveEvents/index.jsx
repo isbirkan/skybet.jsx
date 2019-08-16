@@ -4,7 +4,7 @@ import { StoreContext } from '../../reducers/socket';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/liveEvents';
 
-import Loader from '../../components/Loader/FullLoader';
+import Loader from '../../components/Loader/SmallLoader';
 import Error from '../Error';
 
 import './LiveEvents.scss';
@@ -53,7 +53,7 @@ export default function LiveEvents(props) {
   }
   if (!store.loading && store.liveEvents) {
     content = (
-      <table className="table table-responsive-sm">
+      <table className="table table-responsive-sm liveEvents">
         <thead>
           <tr>
             <th>{resources.NAME}</th>

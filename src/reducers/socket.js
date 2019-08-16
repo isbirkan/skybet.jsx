@@ -26,7 +26,13 @@ export function socketReducer(state, [type, payload]) {
         loading: false,
         error: null
       };
-
+    case actions.MARKET:
+      return {
+        ...state,
+        markets: [...state.markets.filter(m => m.marketId !== payload.marketId), payload],
+        loading: false,
+        error: null
+      };
     case actions.TRIGGER_FORMAT:
       return {
         ...state,

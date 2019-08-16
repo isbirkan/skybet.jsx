@@ -2,20 +2,16 @@ h5 {
   margin-top: 0.5em;
 }
 
-.table {
+.table.liveEvents {
   background-color: #233366;
-  border-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
+  cursor: pointer;
   margin-bottom: 0;
-  
 
   tr {
-    cursor: pointer;
-
-    &:hover{
+    &:hover {
       background-color: #294376;
-      color: #FFFFFF;
+      color: #ffffff;
     }
   }
 }
-
