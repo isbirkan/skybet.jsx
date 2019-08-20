@@ -1,5 +1,6 @@
 import React from 'react';
+import { ERROR } from '../constants/resources/shared';
 
 export default function Error(props) {
-  return <p>{`An error has occurred: ${props.message}`}</p>;
+  return <p>{`${ERROR} ${props.message}`}</p>;
 }

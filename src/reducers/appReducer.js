@@ -6,13 +6,15 @@ export const initialState = {
   markets: [],
   outcomes: [],
   liveEvents: [],
-  primaryMarket: false,
-  format: 'decimal',
+  options: {
+    primaryMarket: false,
+    format: 'decimal'
+  },
   loading: true,
   error: null
 };
 
-export function socketReducer(state, [type, payload]) {
+export function appReducer(state, [type, payload]) {
   switch (type) {
     case actions.INIT:
       return {
@@ -44,13 +46,13 @@ export function socketReducer(state, [type, payload]) {
     case actions.TRIGGER_FORMAT:
       return {
         ...state,
-        format: payload,
+        options: { ...state.options, format: payload },
         error: null
       };
     case actions.TRIGGER_PRIMARY_MARKET:
       return {
         ...state,
-        primaryMarket: payload,
+        options: { ...state.options, primaryMarket: payload },
         error: null
       };
     case actions.LOADING:

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { DispatchContext, StoreContext, initialState, socketReducer } from '../reducers/socket';
+import { DispatchContext, StoreContext, initialState, appReducer } from '../reducers/appReducer';
 import { SocketContext, useSocket } from '../hooks/socket';
 import * as ROUTES from '../constants/routes';
 
@@ -13,7 +13,7 @@ import Loader from '../components/Loader/FullLoader';
 import './App.scss';
 
 export default function App() {
-  const [store, dispatch] = useReducer(socketReducer, initialState);
+  const [store, dispatch] = useReducer(appReducer, initialState);
   const { sendMessage } = useSocket(dispatch);
   console.log(store);
 

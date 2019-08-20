@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/socket';
-import { StoreContext } from '../../reducers/socket';
+import { StoreContext } from '../../reducers/appReducer';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/liveEvents';
 
+import PrimaryMarket from '../../components/PrimaryMarket';
 import Loader from '../../components/Loader/SmallLoader';
 import Error from '../Error';
 
@@ -17,7 +18,7 @@ export default function LiveEvents(props) {
     if (!store.loading && store.liveEvents.length === 0) {
       sendMessage({ type: requestType.LIVE_EVENTS, primaryMarkets: true });
     }
-  }, [store.liveEvents, store.loading, sendMessage]);
+  }, [store.liveEvents, store.loading, store.options.primaryMarkets, sendMessage]);
 
   function goToMarket(marketId) {
     props.history.push(`/market/${marketId}`);
@@ -52,6 +53,22 @@ export default function LiveEvents(props) {
     content = <Error message={store.error.message} />;
   }
   if (!store.loading && store.liveEvents) {
+    const data = store.liveEvents.map(item => (
+      <tr key={`row_${item.eventId}`} onClick={() => goToMarket(item.markets[0])}>
+        <td>{item.name}</td>
+        <td>{item.typeName}</td>
+        <td>{item.className}</td>
+        <td>{buildStatus(item.status)}</td>
+        <td>{formatTime(item.startTime)}</td>
+        <td>{buildScores(item.scores)}</td>
+      </tr>
+      {() => { if(store.options.primaryMarket) return <PrimaryMarket />}}
+    ));
+    if (store.options.primaryMarket) {
+      console.log('yes');
+      data.push(<PrimaryMarket />);
+    }
+
     content = (
       <table className="table table-responsive-sm liveEvents">
         <thead>
@@ -64,18 +81,7 @@ export default function LiveEvents(props) {
             <th>{resources.SCORE}</th>
           </tr>
         </thead>
-        <tbody>
-          {store.liveEvents.map(item => (
-            <tr key={`row_${item.eventId}`} onClick={() => goToMarket(item.markets[0])}>
-              <td>{item.name}</td>
-              <td>{item.typeName}</td>
-              <td>{item.className}</td>
-              <td>{buildStatus(item.status)}</td>
-              <td>{formatTime(item.startTime)}</td>
-              <td>{buildScores(item.scores)}</td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{data}</tbody>
       </table>
     );
   }
