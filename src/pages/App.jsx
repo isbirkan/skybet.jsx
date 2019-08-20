@@ -10,7 +10,7 @@ import Market from './Market';
 import NotFound from './404';
 import Loader from '../components/Loader/FullLoader';
 
-import './global.scss';
+import './App.scss';
 
 export default function App() {
   const [store, dispatch] = useReducer(socketReducer, initialState);

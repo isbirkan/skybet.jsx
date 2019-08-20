@@ -7,7 +7,7 @@ export const initialState = {
   outcomes: [],
   liveEvents: [],
   primaryMarket: false,
-  format: 'fractional',
+  format: 'decimal',
   loading: true,
   error: null
 };
@@ -45,6 +45,12 @@ export function socketReducer(state, [type, payload]) {
       return {
         ...state,
         format: payload,
+        error: null
+      };
+    case actions.TRIGGER_PRIMARY_MARKET:
+      return {
+        ...state,
+        primaryMarket: payload,
         error: null
       };
     case actions.LOADING:

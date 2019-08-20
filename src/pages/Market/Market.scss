@@ -1,11 +1,13 @@
+@import '../../colors';
+
 .table.market {
   th {
-    background-color: #233366;
-    color: #ffffff;
+    background-color: $blue-darker;
+    color: $white;
   }
 
   td {
-    background-color: #294376;
-    color: #ffffff;
+    background-color: $blue;
+    color: $white;
   }
 }

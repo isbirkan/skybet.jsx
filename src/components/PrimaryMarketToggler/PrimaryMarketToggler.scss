@@ -1,3 +1,5 @@
+@import '../../colors';
+
 .switch {
   display: inline-block;
   height: 34px;
@@ -7,45 +9,45 @@
 }
 
 .switch input {
+  height: 0;
   opacity: 0;
   width: 0;
-  height: 0;
 }
 
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #cccccc;
   -webkit-transition: 0.4s;
+  background-color: $gray-very-light;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
   transition: 0.4s;
 }
 
 .slider:before {
-  position: absolute;
+  -webkit-transition: 0.4s;
+  background-color: $white;
+  bottom: 4px;
   content: "";
   height: 26px;
-  width: 26px;
   left: 4px;
-  bottom: 4px;
-  background-color: #ffffff;
-  -webkit-transition: 0.4s;
+  position: absolute;
   transition: 0.4s;
+  width: 26px;
 }
 
 input:checked + .slider {
-  background-color: #c54845;
+  background-color: $red;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #c54845;
+  box-shadow: 0 0 1px $red;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
+  -webkit-transform: translateX(26px);
   transform: translateX(26px);
 }

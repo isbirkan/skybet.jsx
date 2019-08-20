@@ -1,6 +1,8 @@
+@import '../colors';
+
 html,
 body {
-  background-color: #F8F8F8;
+  background-color: $white-smoke;
   height: 100vh;
 }
 
@@ -19,9 +21,9 @@ body {
 }
 
 a {
-  color: #233366;
+  color: $blue-darker;
 
   &:hover {
-    color: #a42327;
+    color: $red-darker;
   }
 }

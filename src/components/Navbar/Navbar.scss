@@ -1,23 +1,14 @@
+@import '../../colors';
+
 .navbar {
-  background-color: #233366;
-  color: #ffffff;
+  background-color: $blue-darker;
+  color: $white;
   font-weight: 700;
-
-  .btn {
-    color: #ffffff;
-    background-color: #c54845;
-    border-color: #a42327;
-    cursor: pointer;
-
-    &.active {
-      background-color: #a42327;
-    }
-  }
 
   a,
   a:active,
   a:hover {
-    color: #ffffff;
+    color: $white;
     text-decoration: none;
   }
 }

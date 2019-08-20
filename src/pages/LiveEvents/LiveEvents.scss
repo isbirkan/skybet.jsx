@@ -1,18 +1,20 @@
+@import '../../colors';
+
 h5 {
   margin-top: 0.5em;
 }
 
 .table.liveEvents {
-  background-color: #233366;
-  color: #ffffff;
+  background-color: $blue-darker;
+  color: $white;
   margin-bottom: 0;
 
   tbody {
     cursor: pointer;
 
     tr:hover {
-      background-color: #294376;
-      color: #ffffff;
+      background-color: $blue;
+      color: $white;
     }
   }
 }
