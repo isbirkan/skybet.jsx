@@ -1,8 +1,7 @@
 import React, { useReducer } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
-import { Container } from 'reactstrap';
 import { DispatchContext, StoreContext, initialState, socketReducer } from '../reducers/socket';
-import { SocketContext, useSocket } from '../hooks/useSocket';
+import { SocketContext, useSocket } from '../hooks/socket';
 import * as ROUTES from '../constants/routes';
 
 import Navbar from '../components/Navbar';
@@ -36,9 +35,7 @@ export default function App() {
         <StoreContext.Provider value={store}>
           <SocketContext.Provider value={sendMessage}>
             <Navbar />
-            <Container fluid className="app-container">
-              {content}
-            </Container>
+            <div className="container fluid app-container">{content}</div>
           </SocketContext.Provider>
         </StoreContext.Provider>
       </DispatchContext.Provider>

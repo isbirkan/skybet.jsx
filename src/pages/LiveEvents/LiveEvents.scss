@@ -5,11 +5,12 @@ h5 {
 .table.liveEvents {
   background-color: #233366;
   color: #ffffff;
-  cursor: pointer;
   margin-bottom: 0;
 
-  tr {
-    &:hover {
+  tbody {
+    cursor: pointer;
+
+    tr:hover {
       background-color: #294376;
       color: #ffffff;
     }

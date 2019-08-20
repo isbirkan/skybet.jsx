@@ -6,6 +6,7 @@ export const initialState = {
   markets: [],
   outcomes: [],
   liveEvents: [],
+  primaryMarket: false,
   format: 'fractional',
   loading: true,
   error: null

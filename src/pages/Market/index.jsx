@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import { SocketContext } from '../../hooks/useSocket';
+import { SocketContext } from '../../hooks/socket';
 import { StoreContext } from '../../reducers/socket';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/markets';

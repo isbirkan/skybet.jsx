@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import { Button, Container, Nav, NavItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { DispatchContext, StoreContext } from '../../reducers/socket';
 import * as actions from '../../constants/actions';
 import * as ROUTES from '../../constants/routes';
 import * as RESOURCES from '../../constants/resources/navbar';
+
+import FormatToggler from '../Toggler';
 
 import './Navbar.scss';
 
@@ -13,21 +14,25 @@ export default function Navbar() {
   const dispatch = useContext(DispatchContext);
 
   function toggleFormat() {
-    dispatch([actions.TRIGGER_FORMAT, store.format === 'fractional' ? 'decimal' : 'fractional']);
+    dispatch([actions.TRIGGER_FORMAT, store.format === true ? 'fractional' : 'decimal']);
+  }
+
+  function togglePrimaryMarket() {
+    dispatch([actions.TRIGGER_PRIMARY_MARKET, !store.primaryMarket]);
   }
 
   function displayStoreObject() {
     console.log(store);
   }
 
-  useEffect(() => {}, [store.format]);
+  useEffect(() => {}, [store.format, store.primaryMarket]);
 
   return (
-    <Nav className="navbar">
-      <Container>
-        <NavItem>
+    <ul className="navbar nav">
+      <div className="container">
+        <li className="nav-item">
           <Link to={ROUTES.LANDING}>{RESOURCES.LIVE_EVENTS}</Link>
-        </NavItem>
+        </li>
         <div className="float-right">
           {RESOURCES.ODDS_FORMAT}
           <div className="btn-group btn-group-toggle ml-2" data-toggle="buttons">
@@ -40,11 +45,16 @@ export default function Navbar() {
               {RESOURCES.DECIMAL}
             </label>
           </div>
-          <Button color="primary" size="sm" hidden onClick={() => displayStoreObject()}>
-            Store
-          </Button>
+          <input
+            type="button"
+            value="Store"
+            className="btn btn-primary btn-sm"
+            hidden
+            onClick={() => displayStoreObject()}
+          />
         </div>
-      </Container>
-    </Nav>
+        <FormatToggler checked={store.format === 'fractional'} onChange={() => toggleFormat()} />
+      </div>
+    </ul>
   );
 }

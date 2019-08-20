@@ -7,3 +7,4 @@ export const OUTCOME = 'OUTCOME_DATA';
 export const ERROR = 'ERROR';
 
 export const TRIGGER_FORMAT = 'TRIGGER_FORMAT';
+export const TRIGGER_PRIMARY_MARKET = 'TRIGGER_PRIMARY_MARKET';
