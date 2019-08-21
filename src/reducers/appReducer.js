@@ -2,6 +2,7 @@ import React from 'react';
 import * as actions from '../constants/actions';
 
 export const initialState = {
+  liveEvents: [],
   events: [],
   markets: [],
   outcomes: [],
@@ -24,7 +25,14 @@ export function appReducer(state, [type, payload]) {
     case actions.LIVE_EVENTS:
       return {
         ...state,
-        events: [...state.events.filter(e => payload.filter(pe => e.eventId !== pe.eventId)), ...payload],
+        liveEvents: payload,
+        loading: false,
+        error: null
+      };
+    case actions.EVENT_DATA:
+      return {
+        ...state,
+        events: [...state.events.filter(e => e.eventId !== payload.eventId), payload],
         loading: false,
         error: null
       };

@@ -14,15 +14,13 @@ export default function LiveEvents(props) {
   const store = useContext(StoreContext);
   const sendMessage = useContext(SocketContext);
 
-  function getLiveEvents() {
-    return store.events.filter(e => e.status.live);
-  }
-
   useEffect(() => {
-    if (!store.loading && store.events.filter(e => e.status.live).length === 0) {
+    document.title = resources.DOCUMENT_TITLE;
+
+    if (!store.loading && store.liveEvents.length === 0) {
       sendMessage({ type: requestType.LIVE_EVENTS, primaryMarkets: true });
     }
-  }, [store.events, store.loading, store.options.primaryMarkets, sendMessage]);
+  }, [store.liveEvents, store.loading, store.options.primaryMarkets, sendMessage]);
 
   function goToEvent(eventId) {
     props.history.push(`/event/${eventId}`);
@@ -52,12 +50,11 @@ export default function LiveEvents(props) {
     return `${scoresObject.home} - ${scoresObject.away}`;
   }
 
-  const liveEvents = getLiveEvents();
   let content = <Loader />;
   if (store.error) {
     content = <Error message={store.error.message} />;
   }
-  if (!store.loading && liveEvents) {
+  if (!store.loading && store.liveEvents) {
     content = (
       <table className="table table-responsive-sm live-events">
         <thead>
@@ -68,7 +65,7 @@ export default function LiveEvents(props) {
           </tr>
         </thead>
         <tbody>
-          {liveEvents.map(event => (
+          {store.liveEvents.map(event => (
             <Fragment key={`event_${event.eventId}`}>
               <tr className="row-live-event" onClick={() => goToEvent(event.eventId)}>
                 <td>{event.name}</td>

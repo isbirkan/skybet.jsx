@@ -1,6 +1,7 @@
 export const FAILURE = 'FAILURE';
 export const INIT = 'INIT';
 export const LIVE_EVENTS = 'LIVE_EVENTS_DATA';
+export const EVENT_DATA = 'EVENT_DATA';
 export const LOADING = 'LOADING';
 export const MARKET = 'MARKET_DATA';
 export const OUTCOME = 'OUTCOME_DATA';
