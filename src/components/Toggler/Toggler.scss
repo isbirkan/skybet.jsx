@@ -16,7 +16,7 @@
 
 .slider {
   -webkit-transition: 0.4s;
-  background-color: $gray-very-light;
+  background-color: $gray-light;
   bottom: 0;
   cursor: pointer;
   left: 0;
@@ -36,6 +36,27 @@
   position: absolute;
   transition: 0.4s;
   width: 26px;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.navbar .btn {
+  align-items: center; 
+  background-color: $white-smoke;
+  border-color: $white-smoke;
+  color: $blue-darker;
+  display: inline-flex;
+  font-weight: 700;
+
+  &.toggler-round {
+    border-radius: 3em;
+  }
 }
 
 input:checked + .slider {

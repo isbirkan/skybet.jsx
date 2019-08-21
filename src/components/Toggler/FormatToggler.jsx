@@ -3,7 +3,7 @@ import { DispatchContext, StoreContext } from '../../reducers/appReducer';
 import * as actions from '../../constants/actions';
 import * as resources from '../../constants/resources/toggler';
 
-import './FormatToggler.scss';
+import './Toggler.scss';
 
 export default function FormatToggler() {
   const store = useContext(StoreContext);

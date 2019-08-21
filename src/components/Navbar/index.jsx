@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import * as ROUTES from '../../constants/routes';
 import * as RESOURCES from '../../constants/resources/navbar';
 
-import FormatToggler from '../FormatToggler';
-import PrimaryMarketToggler from '../PrimaryMarketToggler';
+import FormatToggler from '../Toggler/FormatToggler';
+import PrimaryMarketToggler from '../Toggler/PrimaryMarketToggler';
 
 import './Navbar.scss';
 

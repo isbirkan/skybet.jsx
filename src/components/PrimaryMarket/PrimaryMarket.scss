@@ -1,10 +1,15 @@
 @import '../../colors';
 
 .table.primary-market {
-  background-color: $white;
+  background-color: $gray-very-light;
   color: $blue-darker;
   margin-bottom: 0;
   width: 100%;
+
+  tr {
+    border-left: 2px solid $blue-darker;
+    border-right: 2px solid $blue-darker;
+  }
 }
 
 .row-primary-market {
