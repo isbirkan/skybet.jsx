@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/socket';
 import { StoreContext } from '../../reducers/appReducer';
 import * as requestType from '../../constants/requestTypes';
-import * as resources from '../../constants/resources/outcome';
 
 import Loader from '../Loader/SmallLoader';
 import Error from '../../pages/Error';
@@ -17,15 +16,15 @@ export default function Outcome(props) {
   }
 
   useEffect(() => {
-    if (!store.loading && !getCurrentOutcome()) {
+    if (!store.loading && !store.outcomes.find(m => m.outcomeId === +outcomeId)) {
       sendMessage({ type: requestType.OUTCOME, id: +outcomeId });
     }
-  }, [outcomeId, store.format, store.loading, sendMessage]);
+  }, [outcomeId, store.options.format, store.loading, sendMessage]);
 
   const outcome = getCurrentOutcome();
 
-  function buildPrice() {
-    const { format } = store;
+  function formatOutcome() {
+    const { format } = store.options;
 
     if (format === 'decimal') {
       return outcome.price.decimal;
@@ -38,24 +37,7 @@ export default function Outcome(props) {
     content = <Error message={store.error.message} />;
   }
   if (!store.loading && outcome) {
-    content = (
-      <table className="table table-responsive-sm market">
-        <tbody>
-          <tr>
-            <th>{resources.NAME}</th>
-            <td>{outcome.name}</td>
-          </tr>
-          <tr>
-            <th>{resources.PRICE}</th>
-            <td>{buildPrice()}</td>
-          </tr>
-          <tr>
-            <th>{resources.RESULT}</th>
-            <td>{outcome.result.result}</td>
-          </tr>
-        </tbody>
-      </table>
-    );
+    content = `${outcome.name} ${formatOutcome()}`;
   }
 
   return <div className="d-flex justify-content-center align-items-center">{content}</div>;

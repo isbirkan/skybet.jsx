@@ -1,18 +1,30 @@
 @import '../../colors';
 
-h5 {
-  margin-top: 0.5em;
-}
-
-.table.liveEvents {
+.table.live-events {
   background-color: $blue-darker;
   color: $white;
   margin-bottom: 0;
 
-  tbody {
+  tr.row-live-event {
     cursor: pointer;
 
-    tr:hover {
+    th,
+    td:nth-child(2),
+    td:nth-child(3) {
+      text-align: center;
+    }
+
+    th {
+      cursor: default;
+    }
+  }
+
+  tbody {
+    tr.row-live-event td:nth-child(2) {
+      background-color: $green;
+    }
+
+    tr.row-live-event:hover {
       background-color: $blue;
       color: $white;
     }

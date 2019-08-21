@@ -5,9 +5,8 @@ export const initialState = {
   events: [],
   markets: [],
   outcomes: [],
-  liveEvents: [],
   options: {
-    primaryMarket: false,
+    primaryMarket: true,
     format: 'decimal'
   },
   loading: true,
@@ -25,7 +24,7 @@ export function appReducer(state, [type, payload]) {
     case actions.LIVE_EVENTS:
       return {
         ...state,
-        liveEvents: payload,
+        events: [...state.events.filter(e => payload.filter(pe => e.eventId !== pe.eventId)), ...payload],
         loading: false,
         error: null
       };

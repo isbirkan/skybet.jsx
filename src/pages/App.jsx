@@ -6,7 +6,6 @@ import * as ROUTES from '../constants/routes';
 
 import Navbar from '../components/Navbar';
 import LiveEvents from './LiveEvents';
-import Market from './Market';
 import NotFound from './404';
 import Loader from '../components/Loader/FullLoader';
 
@@ -23,7 +22,6 @@ export default function App() {
       <Switch>
         <Redirect exact from={ROUTES.LANDING} to={ROUTES.LIVE_EVENTS} />
         <Route path={ROUTES.LIVE_EVENTS} component={LiveEvents} />
-        <Route path={ROUTES.MARKET} component={Market} />
         <Route component={NotFound} />
       </Switch>
     );

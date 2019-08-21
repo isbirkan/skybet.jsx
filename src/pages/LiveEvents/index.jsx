@@ -14,14 +14,18 @@ export default function LiveEvents(props) {
   const store = useContext(StoreContext);
   const sendMessage = useContext(SocketContext);
 
+  function getLiveEvents() {
+    return store.events.filter(e => e.status.live);
+  }
+
   useEffect(() => {
-    if (!store.loading && store.liveEvents.length === 0) {
+    if (!store.loading && store.events.filter(e => e.status.live).length === 0) {
       sendMessage({ type: requestType.LIVE_EVENTS, primaryMarkets: true });
     }
-  }, [store.liveEvents, store.loading, store.options.primaryMarkets, sendMessage]);
+  }, [store.events, store.loading, store.options.primaryMarkets, sendMessage]);
 
-  function goToMarket(marketId) {
-    props.history.push(`/market/${marketId}`);
+  function goToEvent(eventId) {
+    props.history.push(`/event/${eventId}`);
   }
 
   function buildStatus(statusObject) {
@@ -41,42 +45,38 @@ export default function LiveEvents(props) {
 
   function formatTime(dateTimeObject) {
     const dateTime = new Date(dateTimeObject);
-    return `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
+    return dateTime.toLocaleTimeString();
   }
 
   function buildScores(scoresObject) {
     return `${scoresObject.home} - ${scoresObject.away}`;
   }
 
+  const liveEvents = getLiveEvents();
   let content = <Loader />;
   if (store.error) {
     content = <Error message={store.error.message} />;
   }
-  if (!store.loading && store.liveEvents) {
+  if (!store.loading && liveEvents) {
     content = (
-      <table className="table table-responsive-sm liveEvents">
+      <table className="table table-responsive-sm live-events">
         <thead>
-          <tr>
+          <tr className="row-live-event">
             <th>{resources.NAME}</th>
-            <th>{resources.TYPE_NAME}</th>
-            <th>{resources.CLASS_NAME}</th>
-            <th>{resources.STATUS}</th>
-            <th>{resources.START_TIME}</th>
             <th>{resources.SCORE}</th>
+            <th>{resources.START_TIME}</th>
           </tr>
         </thead>
         <tbody>
-          {store.liveEvents.map(item => (
-            <Fragment key={`row_${item.eventId}`}>
-              <tr onClick={() => goToMarket(item.markets[0])}>
-                <td>{item.name}</td>
-                <td>{item.typeName}</td>
-                <td>{item.className}</td>
-                <td>{buildStatus(item.status)}</td>
-                <td>{formatTime(item.startTime)}</td>
-                <td>{buildScores(item.scores)}</td>
+          {liveEvents.map(event => (
+            <Fragment key={`event_${event.eventId}`}>
+              <tr className="row-live-event" onClick={() => goToEvent(event.eventId)}>
+                <td>{event.name}</td>
+                <td>{buildScores(event.scores)}</td>
+                <td>{formatTime(event.startTime)}</td>
               </tr>
-              {store.options.primaryMarket && <PrimaryMarket id={item.markets[0]} />}
+              {store.options.primaryMarket &&
+                event.markets.map(market => <PrimaryMarket key={`market_${market}`} id={market} />)}
             </Fragment>
           ))}
         </tbody>
@@ -88,7 +88,7 @@ export default function LiveEvents(props) {
     <div className="container">
       <div className="row">
         <div className="col-md-10 offset-md-1 col-sm-10 offset-sm-1">
-          <div className="card bg-light mb-3 mt-3">
+          <div className="card bg-light mb-3 mt-3 shadow p-3 rounded">
             <h5 className="text-center">{resources.HEADER_TEXT}</h5>
             {content}
           </div>
