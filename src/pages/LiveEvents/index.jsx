@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/socket';
 import { StoreContext } from '../../reducers/appReducer';
 import * as requestType from '../../constants/requestTypes';
@@ -53,22 +53,6 @@ export default function LiveEvents(props) {
     content = <Error message={store.error.message} />;
   }
   if (!store.loading && store.liveEvents) {
-    const data = store.liveEvents.map(item => (
-      <tr key={`row_${item.eventId}`} onClick={() => goToMarket(item.markets[0])}>
-        <td>{item.name}</td>
-        <td>{item.typeName}</td>
-        <td>{item.className}</td>
-        <td>{buildStatus(item.status)}</td>
-        <td>{formatTime(item.startTime)}</td>
-        <td>{buildScores(item.scores)}</td>
-      </tr>
-      {() => { if(store.options.primaryMarket) return <PrimaryMarket />}}
-    ));
-    if (store.options.primaryMarket) {
-      console.log('yes');
-      data.push(<PrimaryMarket />);
-    }
-
     content = (
       <table className="table table-responsive-sm liveEvents">
         <thead>
@@ -81,7 +65,21 @@ export default function LiveEvents(props) {
             <th>{resources.SCORE}</th>
           </tr>
         </thead>
-        <tbody>{data}</tbody>
+        <tbody>
+          {store.liveEvents.map(item => (
+            <Fragment key={`row_${item.eventId}`}>
+              <tr onClick={() => goToMarket(item.markets[0])}>
+                <td>{item.name}</td>
+                <td>{item.typeName}</td>
+                <td>{item.className}</td>
+                <td>{buildStatus(item.status)}</td>
+                <td>{formatTime(item.startTime)}</td>
+                <td>{buildScores(item.scores)}</td>
+              </tr>
+              {store.options.primaryMarket && <PrimaryMarket id={item.markets[0]} />}
+            </Fragment>
+          ))}
+        </tbody>
       </table>
     );
   }

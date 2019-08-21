@@ -38,7 +38,7 @@ This will setup the environment for you. Please sit back and sip on your beer. O
 * React - obviously
 * WebSockets
 * React Router
-* Reactstrap - bootstrap in React
+* Bootstrap
 
 ### Since you're such a nice listener, I threw in a bonus section
 <p align="left">
@@ -65,5 +65,6 @@ Then, all you need to do is change the Visual Studio Code settings, in order to 
 * Material Icon Theme - need to keep a strong visual
 * Path Intellisense
 * Prettier - Javascript formatter (standard --fix)
+* Remote - WSL - sometimes I just don't feel like restarting to Ubuntu
 * Sort lines - still keeping the OCD alive since 2015
 * vscode-faker
