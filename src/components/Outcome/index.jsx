@@ -6,6 +6,8 @@ import * as requestType from '../../constants/requestTypes';
 import Loader from '../Loader/SmallLoader';
 import Error from '../../pages/Error';
 
+import './Outcome.scss';
+
 export default function Outcome(props) {
   const store = useContext(StoreContext);
   const sendMessage = useContext(SocketContext);
@@ -37,8 +39,13 @@ export default function Outcome(props) {
     content = <Error message={store.error.message} />;
   }
   if (!store.loading && outcome) {
-    content = `${outcome.name} ${formatOutcome()}`;
+    content = (
+      <span className="outcome">
+        <label>{outcome.name}</label>
+        <label className="odd">{formatOutcome()}</label>
+      </span>
+    );
   }
 
-  return <div className="d-flex justify-content-center align-items-center">{content}</div>;
+  return content;
 }

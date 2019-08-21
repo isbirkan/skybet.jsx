@@ -1,0 +1,15 @@
+@import '../../colors';
+
+.outcome {
+  text-align: center;
+
+  label {
+    margin: 0px;
+    display: block;
+  }
+
+  .odd {
+    font-weight: 700;
+    color: $red;
+  }
+}
