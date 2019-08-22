@@ -30,3 +30,25 @@
     }
   }
 }
+
+@keyframes blinking {
+  0%{
+    background-color: $white;
+    border: 5px solid $white;
+  }
+  50%{
+    background-color: $yellow;
+    border: 5px solid $yellow;
+  }
+  100%{
+    background-color: $white;
+    border: 5px solid $white;
+  }
+}
+
+.live-footbal-tag {
+  animation: blinking 2s infinite;
+  float: left;
+  position: absolute;
+  top: 10px;
+}

@@ -7,6 +7,8 @@ export const initialState = {
   markets: [],
   outcomes: [],
   options: {
+    marketsPage: 1,
+    marketsResultsPerPage: 5,
     primaryMarket: true,
     format: 'decimal'
   },
@@ -47,6 +49,26 @@ export function appReducer(state, [type, payload]) {
       return {
         ...state,
         outcomes: [...state.outcomes.filter(o => o.outcomeId !== payload.outcomeId), payload],
+        loading: false,
+        error: null
+      };
+    case actions.PAGE_DECREMENT:
+      return {
+        ...state,
+        options: {
+          ...state.options,
+          marketsPage: state.options.marketsPage > 1 ? state.options.marketsPage - 1 : state.options.marketsPage
+        },
+        loading: false,
+        error: null
+      };
+    case actions.PAGE_INCREMENT:
+      return {
+        ...state,
+        options: {
+          ...state.options,
+          marketsPage: state.options.marketsPage + 1
+        },
         loading: false,
         error: null
       };

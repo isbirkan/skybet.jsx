@@ -34,7 +34,7 @@ export default function App() {
         <StoreContext.Provider value={store}>
           <SocketContext.Provider value={sendMessage}>
             <Navbar />
-            <div className="container fluid app-container">{content}</div>
+            <div className="container-fluid app-container">{content}</div>
           </SocketContext.Provider>
         </StoreContext.Provider>
       </DispatchContext.Provider>

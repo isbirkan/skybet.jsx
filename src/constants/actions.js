@@ -7,5 +7,8 @@ export const MARKET = 'MARKET_DATA';
 export const OUTCOME = 'OUTCOME_DATA';
 export const ERROR = 'ERROR';
 
+export const PAGE_DECREMENT = 'PAGE_DECREMENT';
+export const PAGE_INCREMENT = 'PAGE_INCREMENT';
+
 export const TRIGGER_FORMAT = 'TRIGGER_FORMAT';
 export const TRIGGER_PRIMARY_MARKET = 'TRIGGER_PRIMARY_MARKET';

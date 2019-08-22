@@ -5,7 +5,7 @@ import * as helper from '../../helpers/stringHelpers';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/liveEvents';
 
-import PrimaryMarket from '../../components/PrimaryMarket';
+import PrimaryMarket from '../../components/Market';
 import Loader from '../../components/Loader/SmallLoader';
 import Error from '../Error';
 
@@ -50,7 +50,13 @@ export default function LiveEvents(props) {
                 <td>{helper.formatTime(event.startTime)}</td>
               </tr>
               {store.options.primaryMarket &&
-                event.markets.map(market => <PrimaryMarket key={`market_${market}`} id={market} />)}
+                event.markets.map(market => (
+                  <tr key={`market_${market}`}>
+                    <td colSpan="3" className="row-primary-market">
+                      <PrimaryMarket id={market} />
+                    </td>
+                  </tr>
+                ))}
             </Fragment>
           ))}
         </tbody>
@@ -59,13 +65,12 @@ export default function LiveEvents(props) {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-md-10 offset-md-1 col-sm-10 offset-sm-1">
-          <div className="card bg-light mb-3 mt-3 shadow p-3 rounded">
-            <h5 className="text-center">{resources.HEADER_TEXT}</h5>
-            {content}
-          </div>
+    <div className="row">
+      <div className="col-md-8 offset-md-2">
+        <div className="card bg-light mb-3 mt-3 shadow p-3 rounded">
+          <h5 className="live-footbal-tag">{resources.LIVE_FOOTBAL}</h5>
+          <h5 className="text-center">{resources.HEADER_TEXT}</h5>
+          {content}
         </div>
       </div>
     </div>

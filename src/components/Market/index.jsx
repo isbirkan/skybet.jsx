@@ -7,9 +7,9 @@ import Outcome from '../Outcome';
 import Loader from '../Loader/SmallLoader';
 import Error from '../../pages/Error';
 
-import './PrimaryMarket.scss';
+import './Market.scss';
 
-export default function PrimaryMarket(props) {
+export default function Market(props) {
   const store = useContext(StoreContext);
   const sendMessage = useContext(SocketContext);
   const marketId = props.id;
@@ -67,11 +67,5 @@ export default function PrimaryMarket(props) {
       </table>
     );
   }
-  return (
-    <tr>
-      <td colSpan="3" className="row-primary-market">
-        {content}
-      </td>
-    </tr>
-  );
+  return content;
 }

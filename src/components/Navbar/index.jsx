@@ -25,12 +25,12 @@ export default function Navbar() {
         <div className="row">
           <FormatToggler />
           <PrimaryMarketToggler />
-          <input
+          <button
             type="button"
-            value="LOG"
             className={`store-log btn btn-warning ${process.env.NODE_ENV === 'production' ? 'd-none' : ''}`}
-            onClick={() => logStore()}
-          />
+            onClick={() => logStore()}>
+            LOG <br /> STORE
+          </button>
         </div>
       </div>
     </ul>

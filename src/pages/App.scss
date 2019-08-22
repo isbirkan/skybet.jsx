@@ -3,6 +3,9 @@
 html,
 body {
   background-color: $gray-light;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
   height: 100vh;
 }
 
@@ -26,4 +29,8 @@ a {
   &:hover {
     color: $red-darker;
   }
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
