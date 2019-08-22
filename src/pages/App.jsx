@@ -15,7 +15,6 @@ import './App.scss';
 export default function App() {
   const [store, dispatch] = useReducer(appReducer, initialState);
   const { sendMessage } = useSocket(dispatch);
-  console.log(store);
 
   let content = <Loader />;
   if (!store.loading) {

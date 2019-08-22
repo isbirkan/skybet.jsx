@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { StoreContext } from '../../reducers/appReducer';
 import * as ROUTES from '../../constants/routes';
 import * as RESOURCES from '../../constants/resources/navbar';
 
@@ -9,6 +10,12 @@ import PrimaryMarketToggler from '../Toggler/PrimaryMarketToggler';
 import './Navbar.scss';
 
 export default function Navbar() {
+  const store = useContext(StoreContext);
+
+  function logStore() {
+    console.log(store);
+  }
+
   return (
     <ul className="navbar nav">
       <div className="container">
@@ -18,6 +25,12 @@ export default function Navbar() {
         <div className="row">
           <FormatToggler />
           <PrimaryMarketToggler />
+          <input
+            type="button"
+            value="LOG"
+            className={`store-log btn btn-warning ${process.env.NODE_ENV === 'production' ? 'd-none' : ''}`}
+            onClick={() => logStore()}
+          />
         </div>
       </div>
     </ul>

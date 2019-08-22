@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/socket';
 import { StoreContext } from '../../reducers/appReducer';
+import * as helper from '../../helpers/stringHelpers';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/liveEvents';
 
@@ -26,30 +27,6 @@ export default function LiveEvents(props) {
     props.history.push(`/event/${eventId}`);
   }
 
-  function buildStatus(statusObject) {
-    let status = '';
-    Object.keys(statusObject).forEach(key => {
-      if (statusObject[key]) {
-        if (status === '') {
-          status = key;
-        } else {
-          status = `${status}, ${key}`;
-        }
-      }
-    });
-
-    return status;
-  }
-
-  function formatTime(dateTimeObject) {
-    const dateTime = new Date(dateTimeObject);
-    return dateTime.toLocaleTimeString();
-  }
-
-  function buildScores(scoresObject) {
-    return `${scoresObject.home} - ${scoresObject.away}`;
-  }
-
   let content = <Loader />;
   if (store.error) {
     content = <Error message={store.error.message} />;
@@ -69,8 +46,8 @@ export default function LiveEvents(props) {
             <Fragment key={`event_${event.eventId}`}>
               <tr className="row-live-event" onClick={() => goToEvent(event.eventId)}>
                 <td>{event.name}</td>
-                <td>{buildScores(event.scores)}</td>
-                <td>{formatTime(event.startTime)}</td>
+                <td>{helper.buildScores(event.scores)}</td>
+                <td>{helper.formatTime(event.startTime)}</td>
               </tr>
               {store.options.primaryMarket &&
                 event.markets.map(market => <PrimaryMarket key={`market_${market}`} id={market} />)}

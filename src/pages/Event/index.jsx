@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/socket';
 import { StoreContext } from '../../reducers/appReducer';
 import * as requestType from '../../constants/requestTypes';
-import * as resources from '../../constants/resources/events';
+import * as resources from '../../constants/resources/event';
 
 import Loader from '../../components/Loader/SmallLoader';
 import Error from '../Error';
@@ -24,7 +24,7 @@ export default function Event(props) {
     if (!store.loading && !store.events.find(e => e.eventId === +eventId)) {
       sendMessage({ type: requestType.EVENT, id: +eventId });
     }
-  }, [eventId, store.loading, sendMessage]);
+  }, [eventId, store.events, store.loading, sendMessage]);
 
   const event = getCurrentEvent();
   let content = <Loader />;

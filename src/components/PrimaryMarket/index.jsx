@@ -54,10 +54,10 @@ export default function PrimaryMarket(props) {
           </tr>
         </thead>
         <tbody>
-          {outcomeChunks.map((outcomes, index) => (
-            <tr key={`outcomeRow_${index}`}>
-              {outcomes.map((outcome, index) => (
-                <td key={`outcomeColumn_${index}`}>
+          {outcomeChunks.map((outcomes, orIndex) => (
+            <tr key={`outcomeRow_${orIndex}`}>
+              {outcomes.map((outcome, ocIndex) => (
+                <td key={`outcomeColumn_${ocIndex}`}>
                   <Outcome id={outcome} />
                 </td>
               ))}

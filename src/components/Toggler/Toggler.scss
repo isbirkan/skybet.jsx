@@ -1,4 +1,4 @@
-@import '../../colors';
+@import "../../colors";
 
 .switch {
   display: inline-block;
@@ -46,17 +46,18 @@
   border-radius: 50%;
 }
 
-.navbar .btn {
-  align-items: center; 
+.btn.toggler,
+.btn.toggler-round {
+  align-items: center;
   background-color: $white-smoke;
   border-color: $white-smoke;
   color: $blue-darker;
   display: inline-flex;
   font-weight: 700;
+}
 
-  &.toggler-round {
-    border-radius: 3em;
-  }
+.btn.toggler-round {
+  border-radius: 3em;
 }
 
 input:checked + .slider {

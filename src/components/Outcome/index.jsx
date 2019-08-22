@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/socket';
 import { StoreContext } from '../../reducers/appReducer';
+import * as helper from '../../helpers/stringHelpers';
 import * as requestType from '../../constants/requestTypes';
 
 import Loader from '../Loader/SmallLoader';
@@ -25,15 +26,6 @@ export default function Outcome(props) {
 
   const outcome = getCurrentOutcome();
 
-  function formatOutcome() {
-    const { format } = store.options;
-
-    if (format === 'decimal') {
-      return outcome.price.decimal;
-    }
-    return `${outcome.price.num}/${outcome.price.den}`;
-  }
-
   let content = <Loader />;
   if (store.error) {
     content = <Error message={store.error.message} />;
@@ -42,7 +34,7 @@ export default function Outcome(props) {
     content = (
       <span className="outcome">
         <label>{outcome.name}</label>
-        <label className="odd">{formatOutcome()}</label>
+        <label className="odd">{helper.formatOutcome(store.options.format, outcome)}</label>
       </span>
     );
   }

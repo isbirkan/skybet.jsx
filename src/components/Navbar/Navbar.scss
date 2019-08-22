@@ -1,4 +1,4 @@
-@import '../../colors';
+@import "../../colors";
 
 .navbar {
   background-color: $blue-darker;
@@ -11,5 +11,15 @@
   a:hover {
     color: $white;
     text-decoration: none;
+  }
+
+  .store-log {
+    position: fixed;
+    right: 20px;
+    top: 15px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 0.8em;
+    line-height: 1.42857;
   }
 }
