@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { SocketContext } from '../../hooks/socket';
-import { StoreContext } from '../../reducers/appReducer';
+import service from '../../services/api';
+import { StoreContext, DispatchContext } from '../../reducers/appReducer';
 import * as requestType from '../../constants/requestTypes';
 
 import Outcome from '../Outcome';
@@ -11,7 +11,8 @@ import './Market.scss';
 
 export default function Market(props) {
   const store = useContext(StoreContext);
-  const sendMessage = useContext(SocketContext);
+  const dispatch = useContext(DispatchContext);
+  const { getMarket } = service(dispatch);
   const marketId = props.id;
 
   function getCurrentMarket() {
@@ -33,9 +34,9 @@ export default function Market(props) {
 
   useEffect(() => {
     if (!store.loading && !store.markets.find(m => m.marketId === +marketId)) {
-      sendMessage({ type: requestType.MARKET, id: +marketId });
+      getMarket(+marketId);
     }
-  }, [marketId, store.loading, sendMessage]);
+  }, [marketId, store.loading]);
 
   const market = getCurrentMarket();
   let content = <Loader />;

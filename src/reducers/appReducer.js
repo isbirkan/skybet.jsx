@@ -8,7 +8,7 @@ export const initialState = {
   outcomes: [],
   options: {
     marketsPage: 1,
-    marketsResultsPerPage: 5,
+    marketsResultsPerPage: 10,
     primaryMarket: true,
     format: 'decimal'
   },
@@ -22,6 +22,12 @@ export function appReducer(state, [type, payload]) {
       return {
         ...state,
         loading: false,
+        error: null
+      };
+    case actions.LOADING:
+      return {
+        ...state,
+        loading: true,
         error: null
       };
     case actions.LIVE_EVENTS:
@@ -82,12 +88,6 @@ export function appReducer(state, [type, payload]) {
       return {
         ...state,
         options: { ...state.options, primaryMarket: payload },
-        error: null
-      };
-    case actions.LOADING:
-      return {
-        ...state,
-        loading: true,
         error: null
       };
     case actions.ERROR:

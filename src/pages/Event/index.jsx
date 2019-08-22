@@ -94,7 +94,11 @@ export default function Event(props) {
         <div className="card-header">
           <span className="event-header">
             <label className="event-name">{event.name}</label>
-            <label>{`${event.className} - ${event.linkedEventTypeName}`}</label>
+            <label>
+              {event.className}
+              {event.linkedEventTypeName ? ` - ${event.linkedEventTypeName}` : ''}
+            </label>
+            <label>{`${resources.SCORE}: ${helper.buildScores(event.scores)}`}</label>
             <label>{`${resources.START_DATE}: ${helper.formatDate(event.startTime)}`}</label>
             <label>{`${resources.STATUS}: ${helper.buildStatus(event.status)}`}</label>
           </span>
