@@ -58,6 +58,14 @@ export function appReducer(state, [type, payload]) {
         loading: false,
         error: null
       };
+    case actions.PAGE_RESET: {
+      return {
+        ...state,
+        options: { ...state.options, marketsPage: 1 },
+        loading: false,
+        error: null
+      };
+    }
     case actions.PAGE_DECREMENT:
       return {
         ...state,

@@ -1,7 +1,8 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/socket';
-import { StoreContext } from '../../reducers/appReducer';
+import { DispatchContext, StoreContext } from '../../reducers/appReducer';
 import * as helper from '../../helpers/stringHelpers';
+import * as actions from '../../constants/actions';
 import * as requestType from '../../constants/requestTypes';
 import * as resources from '../../constants/resources/liveEvents';
 
@@ -13,6 +14,7 @@ import './LiveEvents.scss';
 
 export default function LiveEvents(props) {
   const store = useContext(StoreContext);
+  const dispatch = useContext(DispatchContext);
   const sendMessage = useContext(SocketContext);
 
   useEffect(() => {
@@ -24,6 +26,7 @@ export default function LiveEvents(props) {
   }, [store.liveEvents, store.loading, store.options.primaryMarkets, sendMessage]);
 
   function goToEvent(eventId) {
+    dispatch([actions.PAGE_RESET]);
     props.history.push(`/event/${eventId}`);
   }
 
