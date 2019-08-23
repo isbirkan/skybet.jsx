@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { SocketContext } from '../../hooks/useSocket';
 import { DispatchContext, StoreContext } from '../../reducers/appReducer';
+import * as actions from '../../constants/actions';
 import * as helper from '../../helpers/stringHelpers';
 import * as requestType from '../../constants/requestTypes';
-import * as actions from '../../constants/actions';
 import * as resources from '../../constants/resources/event';
 
 import Market from '../../components/Market';
@@ -35,8 +35,9 @@ export default function Event(props) {
 
   useEffect(() => {
     document.title = `${resources.DOCUMENT_TITLE} ${eventId}`;
+    const event = store.events.find(e => e.eventId === +eventId);
 
-    if (!store.loading && !store.events.find(e => e.eventId === +eventId)) {
+    if (!store.loading && !event) {
       sendMessage({ type: requestType.EVENT, id: +eventId });
     }
   }, [

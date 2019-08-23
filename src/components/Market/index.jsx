@@ -44,7 +44,7 @@ export default function Market(props) {
 
       getMarket(+marketId);
     }
-  }, [marketId, store.loading]);
+  }, [marketId, props.callType, store.loading]);
 
   const market = getCurrentMarket();
   let content = <Loader />;

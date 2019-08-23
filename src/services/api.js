@@ -18,6 +18,11 @@ export default function service(dispatch) {
       });
   }
 
+  async function getMarkets(marketIdList) {
+    const promises = marketIdList.map(marketId => getMarket(+marketId));
+    console.log(promises);
+  }
+
   async function getOutcome(outcomeId) {
     await api
       .get(`/sportsbook/outcome/${outcomeId}`)
@@ -29,5 +34,5 @@ export default function service(dispatch) {
       });
   }
 
-  return { getMarket, getOutcome };
+  return { getMarket, getMarkets, getOutcome };
 }

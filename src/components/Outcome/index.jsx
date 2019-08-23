@@ -29,7 +29,7 @@ export default function Outcome(props) {
         getOutcome(+outcomeId);
       }
     }
-  }, [outcomeId, store.options.format, store.loading, sendMessage]);
+  }, [outcomeId, props.callType, store.options.format, store.loading, sendMessage]);
 
   const outcome = getCurrentOutcome();
 
