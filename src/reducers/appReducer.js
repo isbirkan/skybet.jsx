@@ -7,10 +7,11 @@ export const initialState = {
   markets: [],
   outcomes: [],
   options: {
+    marketsViewType: 'infinite',
+    format: 'decimal',
     marketsPage: 1,
     marketsResultsPerPage: 10,
-    primaryMarket: true,
-    format: 'decimal'
+    primaryMarket: true
   },
   loading: true,
   error: null
@@ -96,6 +97,13 @@ export function appReducer(state, [type, payload]) {
       return {
         ...state,
         options: { ...state.options, primaryMarket: payload },
+        error: null
+      };
+    case actions.MARKETS_VIEW_TYPE:
+      return {
+        ...state,
+        options: { ...state.options, marketsViewType: payload },
+        loading: false,
         error: null
       };
     case actions.ERROR:

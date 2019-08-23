@@ -13,7 +13,7 @@ export default function PrimaryMarketToggler() {
     dispatch([actions.TRIGGER_PRIMARY_MARKET, !store.options.primaryMarket]);
   }
 
-  useEffect(() => {}, [store.primaryMarket]);
+  useEffect(() => {}, [store.options.primaryMarket]);
 
   return (
     <div className="toggler btn btn-sm ml-1 mr-1">

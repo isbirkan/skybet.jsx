@@ -4,8 +4,8 @@ import { StoreContext } from '../../reducers/appReducer';
 import * as ROUTES from '../../constants/routes';
 import * as RESOURCES from '../../constants/resources/navbar';
 
-import FormatToggler from '../Toggler/FormatToggler';
-import PrimaryMarketToggler from '../Toggler/PrimaryMarketToggler';
+import FormatToggler from '../Toggler/Format';
+import PrimaryMarketToggler from '../Toggler/PrimaryMarket';
 
 import './Navbar.scss';
 
