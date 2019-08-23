@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
+import { SocketContext } from '../../hooks/useSocket';
+import { DispatchContext, StoreContext } from '../../reducers/appReducer';
 import service from '../../services/api';
-import { StoreContext, DispatchContext } from '../../reducers/appReducer';
 import * as requestType from '../../constants/requestTypes';
 
 import Outcome from '../Outcome';
@@ -12,6 +13,7 @@ import './Market.scss';
 export default function Market(props) {
   const store = useContext(StoreContext);
   const dispatch = useContext(DispatchContext);
+  const sendMessage = useContext(SocketContext);
   const { getMarket } = service(dispatch);
   const marketId = props.id;
 
@@ -34,6 +36,12 @@ export default function Market(props) {
 
   useEffect(() => {
     if (!store.loading && !store.markets.find(m => m.marketId === +marketId)) {
+      if (props.callType === 'socket') {
+        sendMessage({ type: requestType.MARKET, id: +marketId });
+      } else {
+        getMarket(+marketId);
+      }
+
       getMarket(+marketId);
     }
   }, [marketId, store.loading]);
@@ -59,7 +67,7 @@ export default function Market(props) {
             <tr key={`outcomeRow_${orIndex}`}>
               {outcomes.map((outcome, ocIndex) => (
                 <td key={`outcomeColumn_${ocIndex}`}>
-                  <Outcome id={outcome} />
+                  <Outcome id={outcome} callType={props.callType} />
                 </td>
               ))}
             </tr>

@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect } from 'react';
-import { SocketContext } from '../../hooks/socket';
+import { SocketContext } from '../../hooks/useSocket';
 import { DispatchContext, StoreContext } from '../../reducers/appReducer';
 import * as helper from '../../helpers/stringHelpers';
 import * as actions from '../../constants/actions';
@@ -56,7 +56,7 @@ export default function LiveEvents(props) {
                 event.markets.map(market => (
                   <tr key={`market_${market}`}>
                     <td colSpan="3" className="row-primary-market">
-                      <PrimaryMarket id={market} />
+                      <PrimaryMarket id={market} callType="socket" />
                     </td>
                   </tr>
                 ))}

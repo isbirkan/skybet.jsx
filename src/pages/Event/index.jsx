@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { SocketContext } from '../../hooks/socket';
+import { SocketContext } from '../../hooks/useSocket';
 import { DispatchContext, StoreContext } from '../../reducers/appReducer';
 import * as helper from '../../helpers/stringHelpers';
 import * as requestType from '../../constants/requestTypes';

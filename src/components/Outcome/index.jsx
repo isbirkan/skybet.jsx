@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { SocketContext } from '../../hooks/socket';
-import { StoreContext } from '../../reducers/appReducer';
+import { SocketContext } from '../../hooks/useSocket';
+import { DispatchContext, StoreContext } from '../../reducers/appReducer';
+import service from '../../services/api';
 import * as helper from '../../helpers/stringHelpers';
 import * as requestType from '../../constants/requestTypes';
 
@@ -11,7 +12,9 @@ import './Outcome.scss';
 
 export default function Outcome(props) {
   const store = useContext(StoreContext);
+  const dispatch = useContext(DispatchContext);
   const sendMessage = useContext(SocketContext);
+  const { getOutcome } = service(dispatch);
   const outcomeId = props.id;
 
   function getCurrentOutcome() {
@@ -20,7 +23,11 @@ export default function Outcome(props) {
 
   useEffect(() => {
     if (!store.loading && !store.outcomes.find(m => m.outcomeId === +outcomeId)) {
-      sendMessage({ type: requestType.OUTCOME, id: +outcomeId });
+      if (props.callType === 'socket') {
+        sendMessage({ type: requestType.OUTCOME, id: +outcomeId });
+      } else {
+        getOutcome(+outcomeId);
+      }
     }
   }, [outcomeId, store.options.format, store.loading, sendMessage]);
 

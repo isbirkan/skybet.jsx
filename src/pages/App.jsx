@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { DispatchContext, StoreContext, initialState, appReducer } from '../reducers/appReducer';
-import { SocketContext, useSocket } from '../hooks/socket';
+import { SocketContext, useSocket } from '../hooks/useSocket';
 import * as ROUTES from '../constants/routes';
 
 import Navbar from '../components/Navbar';

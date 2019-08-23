@@ -18,5 +18,16 @@ export default function service(dispatch) {
       });
   }
 
-  return { getMarket };
+  async function getOutcome(outcomeId) {
+    await api
+      .get(`/sportsbook/outcome/${outcomeId}`)
+      .then(({ data }) => {
+        dispatch([actions.OUTCOME, data.outcome]);
+      })
+      .catch(error => {
+        dispatch([actions.FAILURE, error]);
+      });
+  }
+
+  return { getMarket, getOutcome };
 }
