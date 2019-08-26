@@ -56,7 +56,7 @@ export default function LiveEvents(props) {
                 event.markets.map(market => (
                   <tr key={`market_${market}`}>
                     <td colSpan="3" className="row-primary-market">
-                      <PrimaryMarket id={market} callType="socket" />
+                      <PrimaryMarket id={market} callType="socket" showOutcomes />
                     </td>
                   </tr>
                 ))}

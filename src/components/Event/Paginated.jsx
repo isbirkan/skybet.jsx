@@ -73,7 +73,7 @@ export default function PaginatedEvent(props) {
           <ul className="list-group list-group-flush">
             {marketList.slice((page - 1) * resultsPerPage, page * resultsPerPage).map(market => (
               <li key={`market_${market}`} className="list-group-item">
-                <Market id={market} />
+                <Market id={market} showOutcomes />
               </li>
             ))}
           </ul>

@@ -3,6 +3,7 @@ import { DispatchContext, StoreContext } from '../../reducers/appReducer';
 import service from '../../services/api';
 import * as resources from '../../constants/resources/event';
 
+import Market from '../Market';
 import MarketsView from '../Toggler/MarketsView';
 import Loader from '../Loader/SmallLoader';
 import Error from '../../pages/Error';
@@ -37,11 +38,9 @@ export default function InfiniteEvent(props) {
               <MarketsView />
             </span>
           </div>
-          <ul>
-            {markets.map(market => (
-              <li key={`market_${market.marketId}`}>{`${market.displayOrder} - ${market.name}`}</li>
-            ))}
-          </ul>
+          {markets.map(market => (
+            <Market key={`market_${market.marketId}`} id={market.marketId} />
+          ))}
         </div>
       </Fragment>
     );

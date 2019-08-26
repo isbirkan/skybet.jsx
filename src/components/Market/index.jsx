@@ -16,6 +16,7 @@ export default function Market(props) {
   const sendMessage = useContext(SocketContext);
   const { getMarket } = service(dispatch);
   const marketId = props.id;
+  const showOutcomes = props.showOutcomes;
 
   function getCurrentMarket() {
     return store.markets.find(m => m.marketId === +marketId);
@@ -62,17 +63,19 @@ export default function Market(props) {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {outcomeChunks.map((outcomes, orIndex) => (
-            <tr key={`outcomeRow_${orIndex}`}>
-              {outcomes.map((outcome, ocIndex) => (
-                <td key={`outcomeColumn_${ocIndex}`}>
-                  <Outcome id={outcome} callType={props.callType} />
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
+        {showOutcomes && (
+          <tbody>
+            {outcomeChunks.map((outcomes, orIndex) => (
+              <tr key={`outcomeRow_${orIndex}`}>
+                {outcomes.map((outcome, ocIndex) => (
+                  <td key={`outcomeColumn_${ocIndex}`}>
+                    <Outcome id={outcome} callType={props.callType} />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        )}
       </table>
     );
   }
