@@ -52,7 +52,7 @@ export default function Event(props) {
           </span>
         </div>
         {marketsViewType === 'infinite' ? (
-          <Infinite marketList={event.markets} />
+          <Infinite marketList={event.markets} eventId={event.eventId} />
         ) : (
           <Paginated marketList={event.markets} />
         )}

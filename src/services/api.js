@@ -20,7 +20,7 @@ export default function service(dispatch) {
 
   async function getMarkets(marketIdList) {
     const promises = marketIdList.map(marketId => getMarket(+marketId));
-    console.log(promises);
+    axios.all(promises);
   }
 
   async function getOutcome(outcomeId) {
